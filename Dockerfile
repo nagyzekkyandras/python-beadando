@@ -5,10 +5,9 @@ COPY ./src/ /app
 
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y gcc default-libmysqlclient-dev pkg-config \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN pip3 install --no-cache-dir -r requirements.txt
+    && apt-get install -y default-libmysqlclient-dev gcc pkg-config \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip3 install --no-cache-dir -r requirements.txt
 
 EXPOSE 5000
 
