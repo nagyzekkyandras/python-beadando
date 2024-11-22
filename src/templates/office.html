@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Attendance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page">
+        <div class="menu">
+            <ul>
+                <li><a href="/profil">Profil</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><p></p></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <h1>Office Attendance for Today</h1>
+            {% if users_in_office %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Team</th>
+                        <th>Title</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users_in_office %}
+                    <tr>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.team }}</td>
+                        <td>{{ user.title }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No users are currently working in the office.</p>
+            {% endif %}
+
+        </div>
+    </div>
+</body>
+</html>

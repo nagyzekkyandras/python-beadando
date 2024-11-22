@@ -1,0 +1,52 @@
+.page {
+    width: 100%;
+}
+
+.menu { 
+    width: 20%;
+    float: left;
+}
+
+.content {
+    width: 79%;
+    float: right;
+    margin: auto;
+}
+
+.login-reg {
+    width: 250px;
+    margin: auto;
+}
+
+ul { list-style-type:none; }
+
+.flash-message {
+    color: blue;
+}
+
+.flash-success {
+    color: green;
+}
+
+.flash-danger {
+    color: red;
+}
+
+input {
+    margin: 5px;
+}
+
+button {
+    margin: 5px;
+}
+
+table {
+    border: solid black 1px;
+}
+
+td {
+    border: solid black 1px;
+    margin: auto;
+    padding: 1px;
+    width: 200px;
+}
