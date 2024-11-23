@@ -3,12 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
+import os
 
 app = Flask(__name__)
-app.secret_key = "my_full_random_secret_key_123" # fontos adatok eláírásáshoz kell
+app.secret_key = os.getenv("APP_SECRET") # fontos adatok eláírásáshoz kell
 
 # Configure the MySQL database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:rootpassword@mysql_db:3306/app_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DB_URL")
 db = SQLAlchemy(app)
 
 # Configure Flask-Login
@@ -33,7 +34,7 @@ class WorkdayLocation(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     work_date = db.Column(db.Date, nullable=False)
     location = db.Column(db.Enum('Office', 'Home Office', 'Other'), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.datetime)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now)
 
 # for reasons: https://flask-login.readthedocs.io/en/latest/#how-it-works
 @login_manager.user_loader

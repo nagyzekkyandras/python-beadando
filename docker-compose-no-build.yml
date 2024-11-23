@@ -17,6 +17,9 @@ services:
 
   app:
     image: andris741/python-beadando
+    environment:
+      DB_URL: 'mysql+mysqlconnector://root:rootpassword@mysql_db:3306/app_db'
+      APP_SECRET: "my_full_random_secret_key_123"
     container_name: python_app
     ports:
       - "5000:5000"
